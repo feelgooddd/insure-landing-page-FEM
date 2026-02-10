@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Insure Landing Page - Feel Good Devs",
-  description: "A landing page to help you stay insured",
+  description: "A landing page to help you stay insured.",
 };
 
 export default function RootLayout({
