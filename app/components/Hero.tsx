@@ -21,6 +21,11 @@ const mobileSlides = [
 const Hero = () => {
   const [current, setCurrent] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)")
@@ -38,7 +43,7 @@ const Hero = () => {
     const slides = isMobile ? mobileSlides : desktopSlides
     const timer = setInterval(() => {
       setCurrent(prev => (prev + 1) % slides.length)
-    }, 4000)
+    }, 3000)
     return () => clearInterval(timer)
   }, [isMobile])
 
@@ -75,9 +80,8 @@ const Hero = () => {
           </button>
         </div>
 
-<div className="w-full md:absolute md:right-0 md:top-65 md:w-1/2 md:max-w-xl">
+        <div className="w-full md:absolute md:right-0 md:top-65 md:w-1/2 md:max-w-xl">
           <div className="relative w-full">
-            {/* Ghost image preserves natural dimensions per breakpoint */}
             <picture>
               <source media="(min-width: 768px)" srcSet="/images/image-intro-desktop.jpg" />
               <img
@@ -94,8 +98,8 @@ const Hero = () => {
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{
                   opacity: i === current ? 1 : 0,
-                  transform: i === current ? "scale(1.08)" : "scale(1)",
-                  transition: "opacity 1000ms ease, transform 4000ms ease",
+                  transform: i === current && mounted ? "scale(1.08)" : "scale(1)",
+                  transition: "opacity 1000ms ease, transform 3000ms ease",
                 }}
               />
             ))}
